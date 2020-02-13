@@ -1,16 +1,30 @@
 import requests
+import json
+from urllib.parse import urljoin
+from truth.truth import AssertThat
+from support import config
 
-url = "http://192.168.0.125/netrisuser_api"
 
+class TestCorrectLogin:
 
-class SessionHelper:
+    def auth(self):
+        body = {"login": config.get('login'), "password": config.get('password')}
+        r = requests.post(
+            urljoin(config.get('url'), "/login"),
+            body=json.dumps(body)
+        )
+        return r
 
-    def login_with_data(self):
-        d = {"login": "test_ABM_admin",
-             "password": "test_ABM_admin"}
-        r = requests.post(url + "/login", json=d)
+    def test_login_with_data(self):
+        r = self.auth(config.get('login'), config.get('password'))
+        token, user_id = r.json()['result']['token'], r.json()['result']['id']
+
         assert r.status_code == 200
+        AssertThat(r.json()['result']).ContainsItem(user_id, 3562)
+        AssertThat(r.json()['result']).ContainsItem(user_id, 3562)
+        assert ['id'] in r.json and r.json()[
+            'id'] == '3562'
 
 
-login = SessionHelper()
-login.login_with_data()
+login = TestCorrectLogin()
+login.test_login_with_data()
