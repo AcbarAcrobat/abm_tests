@@ -1,6 +1,4 @@
 import requests
-import json
-from urllib.parse import urljoin
 from truth.truth import AssertThat
 from support import config
 
@@ -16,9 +14,9 @@ class TestApi:
 
     def test_validate_with_token(self, url=config.get("url")):
         r = self.auth()
-        v = requests.post(url+"/user", json={'token': r.json()['result']['token']})
-        AssertThat(v.json()['result']).ContainsItem("id", 3562)
-        print(v)
+        r = requests.post(url+"/user", json={'token': r.json()['result']['token']})
+        AssertThat(r.json()['result']).ContainsItem("id", 3562)
+        print(r)
 
     def test_correct_login_with_data(self):
         r = self.auth()
@@ -48,3 +46,10 @@ class TestApi:
         d = {"token": " "}
         r = requests.post(config.get("url") + "/user", json=d)
         assert r.status_code == 401
+
+    def test_get_user_by_string_id(self, username=config.get("login"), url=config.get("url")):
+        v = self.auth()
+        r = requests.post(url + "/user/username", json={"token": v.json()["result"]["token"],
+                                                        "username": username})
+        print(r)
+
