@@ -92,7 +92,7 @@ class TestApi:
     def test_get_user_by_string_id_incorrect_user(self, url=config.get("url")):
         v = self.auth()
         r = requests.post(url + "/user/username", json={"token": v.json()["result"]["token"],
-                                                        "username": "123"})
+                                                        "username": self.random_value()})
         AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
 
