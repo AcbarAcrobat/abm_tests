@@ -1,4 +1,5 @@
 import pytest
+from fixture.Application import Application
 import requests
 from truth.truth import AssertThat
 from support import config
@@ -14,12 +15,31 @@ class TestApi:
                           json=body)
         return r
 
-    def get_region(self, url=config.get("url")):
+    # def get_region(self, url=config.get("url")):
+    #     a = self.auth()
+    #     token_ = a.json()["result"]["token"]
+    #     r = requests.post(url + "/user/regions", json={"token": token_})
+    #     group = r.json()["result"]["data"]
+    #     foo = random.choice(group)
+    #     print(foo)
+    #     return foo
+
+    def get_region_lam(self, url = config.get("url")):
         a = self.auth()
         token_ = a.json()["result"]["token"]
         r = requests.post(url + "/user/regions", json={"token": token_})
         group = r.json()["result"]["data"]
-        foo = random.choice(group)
+        int_group = []
+        for i in group:
+            try:
+                int_val = int(i)
+                if int_val != 0:
+                    int_group.append(int_val)
+            except Exception:
+                pass
+        # first_integer = next(filter(lambda i: i.isdigit(), group))
+        foo = random.choice(int_group)
+        print(foo)
         return foo
 
     def test_validate_with_token(self, url=config.get("url")):
@@ -39,7 +59,6 @@ class TestApi:
              "password": " "}
         r = requests.post(config.get('url') + "/login", json=d)
         AssertThat(r.status_code).IsEqualTo(401)
-        # assert r.status_code == 401
         print(r.status_code)
 
     def test_incorrect_login_with_data(self):
@@ -93,12 +112,12 @@ class TestApi:
             AssertionError and print("User with ID", a.json()['result']['id'], "is have not admin role")
         print(r)
 
-    def test_get_user_by_string_id_and_incorrect_token_max_int(self, url=config.get("url")):
-        a = self.auth()
-        r = requests.post(url + "/user/id", json={"token": a.json()['result']['token'],
-                                                  "id": 9223372036854775807})
-        assert r.status_code == 401
-        print(r.json())
+    # def test_get_user_by_string_id_and_incorrect_token_max_int(self, url=config.get("url")):
+    #     a = self.auth()
+    #     r = requests.post(url + "/user/id", json={"token": a.json()['result']['token'],
+    #                                               "id": 9223372036854775807})
+    #     assert r.status_code == 401
+    #     print(r.json())
 
     def test_get_user_by_string_id_and_token_null(self, url=config.get("url")):
         a = self.auth()
@@ -107,12 +126,12 @@ class TestApi:
         assert r.status_code == 401
         print(r)
 
-    def test_get_user_by_null_id_and_correct_token(self, url=config.get("url")):
-        a = self.auth()
-        r = requests.post(url + "/user/id", json={"token": a.json()['result']['token'],
-                                                  "id": -15})
-        assert r.status_code == 401
-        print(r)
+    # def test_get_user_by_null_id_and_correct_token(self, url=config.get("url")):
+    #     a = self.auth()
+    #     r = requests.post(url + "/user/id", json={"token": a.json()['result']['token'],
+    #                                               "id": 0})
+    #     assert r.status_code == 401
+    #     print(r)
 
     def test_get_regions_by_token(self, url=config.get("url")):
         a = self.auth()
@@ -134,7 +153,7 @@ class TestApi:
     def test_get_workgroup_by_token_and_region(self, url=config.get("url")):
         a = self.auth()
         r = requests.post(url + "/region/workgroup", json={"token": a.json()["result"]["token"],
-                                                           "region": self.get_region()})
+                                                           "region": self.get_region_lam()})
         AssertThat(r.status_code).IsEqualTo(200)
         print(r.json())
         print(r)
