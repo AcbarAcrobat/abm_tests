@@ -1,3 +1,6 @@
 venv
 .idea
-
+.pytest_cache
+config.yml
+pytest.log
+target.json
