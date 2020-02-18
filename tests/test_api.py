@@ -15,6 +15,11 @@ class TestApi:
                           json=body)
         return r
 
+    def random_value(self):
+        v = random.randint(0, 999)
+        print(v)
+        return v
+
     # def get_region(self, url=config.get("url")):
     #     a = self.auth()
     #     token_ = a.json()["result"]["token"]
@@ -76,7 +81,7 @@ class TestApi:
     def test_get_user_with_token_null(self):
         d = {"token": " "}
         r = requests.post(config.get("url") + "/user", json=d)
-        assert r.status_code == 401
+        AssertThat(r.status_code).IsEqualTo(401)
 
     def test_get_user_by_string_id(self, username=config.get("login"), url=config.get("url")):
         r = self.auth()
@@ -88,19 +93,19 @@ class TestApi:
         v = self.auth()
         r = requests.post(url + "/user/username", json={"token": v.json()["result"]["token"],
                                                         "username": "123"})
-        assert r.status_code == 401
+        AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
 
     def test_get_user_by_string_id_incorrect_token(self, url=config.get("url")):
         r = requests.post(url + "/user/username", json={"token": " %%%%%%%",
                                                         "username": config.get("login")})
-        assert r.status_code == 401
+        AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
 
     def test_get_user_by_string_id_with_null(self, url=config.get("url")):
         r = requests.post(url + "/user/username", json={"token": "  ",
                                                         "username": "  "})
-        assert r.status_code == 401
+        AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
 
     def test_get_user_by_string_id_and_token(self, url=config.get("url")):
@@ -123,7 +128,7 @@ class TestApi:
         a = self.auth()
         r = requests.post(url + "/user/id", json={"token": " ",
                                                   "id": a.json()['result']['id']})
-        assert r.status_code == 401
+        AssertThat(r.status_code).IsEqualTo(401)
         print(r)
 
     # def test_get_user_by_null_id_and_correct_token(self, url=config.get("url")):
@@ -155,5 +160,26 @@ class TestApi:
         r = requests.post(url + "/region/workgroup", json={"token": a.json()["result"]["token"],
                                                            "region": self.get_region_lam()})
         AssertThat(r.status_code).IsEqualTo(200)
+        print(r.json())
+        print(r)
+
+    def test_get_workgroup_by_incorrect_token_and_correct_region(self, url=config.get("url")):
+        r = requests.post(url + "/region/workgroup", json={"token": "3AED6F4648F581DGVZEF6645C833DEFFC9BAAVGBBGY",
+                                                           "region": self.get_region_lam()})
+        AssertThat(r.status_code).IsEqualTo(401)
+        print(r.json())
+        print(r)
+
+    def test_get_workgroup_by_empty_token_and_correct_region(self, url=config.get("url")):
+        r = requests.post(url + "/region/workgroup", json={"token": "                         ",
+                                                           "region": self.get_region_lam()})
+        AssertThat(r.status_code).IsEqualTo(401)
+        print(r.json())
+        print(r)
+
+    def test_get_workgroup_by_incorrect_token_and_incorrect_region(self, url=config.get("url")):
+        r = requests.post(url + "/region/workgroup", json={"token": "3AED6F4648F581DGVZEF6645C833DEFFC9BAAVGBBGY",
+                                                           "region": self.random_value()})
+        AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
         print(r)
