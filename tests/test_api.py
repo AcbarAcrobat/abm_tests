@@ -1,7 +1,7 @@
 import requests
 from truth.truth import AssertThat
 
-from fixture.TestData import TestData
+from fixture.testdata import TestData
 import random
 
 
@@ -24,7 +24,7 @@ class TestApi(TestData):
         print(v)
         return v
 
-    # def get_region(self, url=config.get("url")):
+    # def get_user_regions(self, url=config.get("url")):
     #     a = self.autorize()
     #     tok3n = a.json()["result"]["tok3n"]
     #     r = requests.post(url + "/user/regions", json={"tok3n": tok3n})
@@ -34,7 +34,7 @@ class TestApi(TestData):
     #     print(foo)
     #     return foo
 
-    def get_region(self):
+    def get_user_regions(self):
         r = requests.post(self.url() + "/user/regions", json={"token": self.tok3n()})
         group = r.json()["result"]["data"]
         int_group = []
@@ -151,21 +151,21 @@ class TestApi(TestData):
 
     def test_get_workgroup_by_token_and_region(self):
         r = requests.post(self.url() + "/region/workgroup", json={"token": self.tok3n(),
-                                                                  "region": self.get_region()})
+                                                                  "region": self.get_user_regions()})
         AssertThat(r.status_code).IsEqualTo(200)
         print(r.json())
         print(r)
 
     def test_get_workgroup_by_incorrect_token_and_correct_region(self):
         r = requests.post(self.url() + "/region/workgroup", json={"token": "3AED6F4648F581DGVZEF6645C833DEBAAVGBBGY",
-                                                                  "region": self.get_region()})
+                                                                  "region": self.get_user_regions()})
         AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
         print(r)
 
     def test_get_workgroup_by_empty_token_and_correct_region(self):
         r = requests.post(self.url() + "/region/workgroup", json={"token": "                         ",
-                                                                  "region": self.get_region()})
+                                                                  "region": self.get_user_regions()})
         AssertThat(r.status_code).IsEqualTo(401)
         print(r.json())
         print(r)
