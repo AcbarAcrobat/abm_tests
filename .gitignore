@@ -4,3 +4,4 @@ venv
 config.yml
 pytest.log
 target.json
+__pycache__
