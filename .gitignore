@@ -5,3 +5,4 @@ config.yml
 pytest.log
 target.json
 __pycache__
+tests/__pycache__
