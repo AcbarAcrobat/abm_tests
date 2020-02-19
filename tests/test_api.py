@@ -2,7 +2,6 @@ import requests
 from truth.truth import AssertThat
 
 from fixture.TestData import TestData
-from support import config
 import random
 
 
