@@ -4,13 +4,10 @@ from support import config
 class TestData:
 
     def url(self):
-        url = config.get("url")
-        return url
+        return config.get("url")
 
     def username(self):
-        login = config.get("login")
-        return login
+        return config.get("login")
 
     def password(self):
-        password = config.get("password")
-        return password
+        return config.get("password")
