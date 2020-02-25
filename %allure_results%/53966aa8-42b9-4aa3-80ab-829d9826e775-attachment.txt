@@ -1,3 +1,0 @@
-1198
-{'error': 'token is required'}
-<Response [401]>

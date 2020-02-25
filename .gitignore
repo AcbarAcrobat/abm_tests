@@ -1,9 +1,11 @@
-**/venv/
-**/idea/
-**/pytest_cache/
+**/venv
+**/.idea
+**/pytest_cache
 **/config.yml
 **/pytest.log
 **/target.json
-**/__pycache__/
+**/__pycache__
 tests/__pycache__
-**/%allure_result_folder%/
+**/%allure_results%
+.__pycache__/
+venv
