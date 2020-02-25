@@ -1,8 +1,9 @@
-venv
-.idea
-.pytest_cache
-config.yml
-pytest.log
-target.json
-__pycache__
+*.venv/
+*.idea/
+*.pytest_cache/
+*.config.yml
+*.pytest.log
+*.target.json
+*.__pycache__/
 tests/__pycache__
+**/%allure_result_folder%/

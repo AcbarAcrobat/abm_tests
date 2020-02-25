@@ -6,3 +6,4 @@ pytest-logger
 jsonschema
 urllib3
 pytruth
+allure-pytest
