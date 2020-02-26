@@ -17,4 +17,3 @@ config.yml
 **/.idea
 **/config.yml
 allure_results
-**/allure_results

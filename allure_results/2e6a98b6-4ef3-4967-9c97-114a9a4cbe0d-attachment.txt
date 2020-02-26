@@ -1,1 +1,0 @@
-{'result': {'token': '46D63D193D57AA775899EF2123D5A4A8', 'id': 3562, 'roles': ['Access-To-The-Functions-Of-Video-Analytics', 'ChangePassword', 'Personal-Settings', 'ROLE_ABM_ADMIN', 'ROLE_MAIN_OPERATOR', 'See-Cameras', 'See-Cameras-Video', 'SeeArchiveVideo']}, 'done': True}
