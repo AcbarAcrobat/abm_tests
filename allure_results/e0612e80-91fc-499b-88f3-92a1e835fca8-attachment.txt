@@ -1,0 +1,2 @@
+{'error': 'Token is required'}
+401

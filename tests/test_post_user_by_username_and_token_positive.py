@@ -8,10 +8,13 @@ T = TestData()
 H = Helper()
 
 
-@allure.step("Post url + /user/username with token={'H.tok3n()'} and username={'T.username()'}")
-def test_get_user_by_string_id():
-    with allure.step("send request to the server with values token={'H.tok3n()'} and username={'T.username()"):
+@allure.parent_suite("POSITIVE")
+@allure.sub_suite("/user/username")
+@allure.title("Post request to the url + /user/username")
+def test_post_user_by_username_and_token():
+    with allure.step("Send request to the server"):
         r = requests.post(T.url() + "/user/username", json={"token": H.tok3n(),
                                                             "username": T.username()})
+    with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
-        print(r.status_code)
+    print(r.status_code)

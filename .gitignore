@@ -2,11 +2,11 @@ support/__pycache__
 tests/__pycache__
 .idea
 *.log
-venv
+venv/
 .pytest_cache
 tests/.pytect_cache
-tests/get_api/.pytect_cache
-tests/.pytect_cache
+*.pytect_cache
+**/tests/.pytect_cache
 fixture/.pytest_cache
 tests/.pytest_cache
 tests/.pytest_cache
@@ -15,5 +15,8 @@ __pycache__
 *.log
 .idea
 config.yml
+**/.pytest_cache
+**/__pychache__
+**/.idea
+**/config.yml
 .pytest_cache
-

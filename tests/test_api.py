@@ -40,17 +40,17 @@
     #     AssertThat(r.status_code).IsEqualTo(401)
     #     print(r.status_code)
 
-    # def test_get_user_with_incorrect_token(self):
+    # def test_post_user_with_incorrect_token(self):
     #     r = requests.post(TeD.url() + "/user", json={"token": randomPassword()})
     #     AssertThat(r.status_code).IsEqualTo(401)
     #     print(r.status_code)
 
-    # def test_get_user_with_token_null(self):
+    # def test_post_user_with_token_null(self):
     #     r = requests.post(TeD.url() + "/user", json={"token": " "})
     #     AssertThat(r.status_code).IsEqualTo(401)
     #     print(r.status_code)
 
-    # def test_get_user_by_string_id(self):
+    # def test_post_user_by_username_and_token(self):
     #     r = requests.post(TeD.url() + "/user/username", json={"token": H.tok3n(),
     #                                                           "username": TeD.username()})
     #     print(r.status_code)
@@ -76,7 +76,7 @@
     #     print(r.json())
     #     print(r.status_code)
 
-    # def test_get_user_by_string_id_and_token(self):
+    # def test_post_user_by_id_and_token_positive(self):
     #     r = requests.post(T.url() + "/user/id", json={"token": H.tok3n(),
     #                                                     "id": H.get_id()})
     #     AssertThat(r.status_code).IsEqualTo(200)
@@ -84,7 +84,7 @@
     #         AssertionError and print("User with ID", r.json()['result']['id'], "is have not admin role")
     #     print(r.status_code)
 
-    # def test_get_user_by_string_id_and_incorrect_token_max_int(self):
+    # def test_post_user_by_id_and_correct_token_max_int(self):
     #     a = H.autorize()
     #     r = requests.post(TeD.url() + "/user/id", json={"token": a.json()['result']['tok3n'],
     #                                                     "id": 9223372036854775807})

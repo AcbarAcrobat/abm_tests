@@ -9,10 +9,12 @@ TeD = TestData()
 H = Helper()
 
 
-@allure.step('step2')
-def test_correct_login_with_data(self):
+@allure.parent_suite("POSITIVE")
+@allure.sub_suite("/login")
+@allure.title("Post login with correct values")
+def test_correct_login_with_data():
     with allure.step('send request to the server with {r}'):
         r = H.autorize()
+    with allure.step("Assert status code is 200"):
         AssertThat(r.status_code).IsEqualTo(200)
-        # AssertThat(r.json()['result']).ContainsItem("roles", ["ROLE_ABM_ADMIN"])
-        print(r.json())
+    print(r.json())
