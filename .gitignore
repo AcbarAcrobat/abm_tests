@@ -9,12 +9,14 @@ tests/.pytect_cache
 **/tests/.pytect_cache
 fixture/.pytest_cache
 tests/.pytest_cache
+tests/.pytest_cache
 config.yaml
 __pycache__
+*.log
+.idea
 config.yml
 **/.pytest_cache
 **/__pychache__
 **/.idea
 **/config.yml
-allure_results
-**/allure_results
+.pytest_cache
