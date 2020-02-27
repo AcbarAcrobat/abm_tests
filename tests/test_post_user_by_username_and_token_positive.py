@@ -1,8 +1,8 @@
 import allure
 import requests
 from truth.truth import AssertThat
-from src.testdata import TestData
-from src.helper import Helper
+from utils.testdata import TestData
+from utils.helper import Helper
 
 T = TestData()
 H = Helper()
@@ -18,3 +18,4 @@ def test_post_user_by_username_and_token():
     with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
     print(r.status_code)
+    print(r.json())

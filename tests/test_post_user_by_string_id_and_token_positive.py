@@ -1,8 +1,8 @@
 import allure
 import requests
 from truth.truth import AssertThat
-from src.testdata import TestData
-from src.helper import Helper
+from utils.testdata import TestData
+from utils.helper import Helper
 
 T = TestData()
 H = Helper()
