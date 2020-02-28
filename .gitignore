@@ -18,4 +18,3 @@ config.yml
 **/config.yml
 allure_results
 fixture
-*allure*
