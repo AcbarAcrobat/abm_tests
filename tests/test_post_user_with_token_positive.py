@@ -3,8 +3,9 @@ import requests
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
+import logging
 
-
+LOGGER = logging.getLogger(__name__)
 T = TestData()
 H = Helper()
 
@@ -22,5 +23,6 @@ def test_post_user_with_token():
     with allure.step("Assert ROLE_ABM_ADMIN and ROLE_MAIN_OPERATOR in r.json()[result]"):
         AssertThat(r.json()["result"]["roles"])\
             .ContainsAllIn(['ROLE_ABM_ADMIN', 'ROLE_MAIN_OPERATOR'])
-    print(r.status_code)
-    print(r.json())
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())

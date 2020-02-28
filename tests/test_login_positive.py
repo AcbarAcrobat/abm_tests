@@ -2,9 +2,10 @@ import allure
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
+import logging
 
-
-TeD = TestData()
+LOGGER = logging.getLogger(__name__)
+T = TestData()
 H = Helper()
 
 
@@ -16,4 +17,8 @@ def test_correct_login_with_data():
         r = H.autorize()
     with allure.step("Assert status code is 200"):
         AssertThat(r.status_code).IsEqualTo(200)
-    print(r.json())
+    with allure.step("Assert contains result in r.json()"):
+        AssertThat(r.json()).ContainsKey("result")
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())

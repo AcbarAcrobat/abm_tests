@@ -3,9 +3,10 @@ import requests
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
+import logging
 
-
-TeD = TestData()
+LOGGER = logging.getLogger(__name__)
+T = TestData()
 H = Helper()
 
 
@@ -14,7 +15,9 @@ H = Helper()
 @allure.title("Post user with incorrect token")
 def test_post_user_with_token_null():
     with allure.step("Send request to the server with token null"):
-        r = requests.post(TeD.url() + "/user", json={"token": " "})
+        r = requests.post(T.url() + "/user", json={"token": " "})
     with allure.step("Assert status code is 401"):
         AssertThat(r.status_code).IsEqualTo(401)
-    print(r.status_code)
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())

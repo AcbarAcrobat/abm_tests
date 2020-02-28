@@ -3,8 +3,9 @@ import requests
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
+import logging
 
-
+LOGGER = logging.getLogger(__name__)
 TeD = TestData()
 H = Helper()
 
@@ -18,5 +19,6 @@ def test_post_user_by_string_id_incorrect_user():
                                                               "username": H.random_value()})
     with allure.step("Assert status code is"):
         AssertThat(r.status_code).IsEqualTo(401)
-    print(r.json())
-    print(r.status_code)
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())
