@@ -16,5 +16,5 @@ config.yml
 **/__pychache__
 **/.idea
 **/config.yml
-allure_results
+allure_results/
 fixture
