@@ -18,3 +18,4 @@ config.yml
 allure_results/
 fixture
 *.pytest_cache
+*.yml

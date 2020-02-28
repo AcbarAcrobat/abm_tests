@@ -6,6 +6,7 @@ from utils.helper import Helper
 from generator.password_generator import random_password
 import logging
 
+
 LOGGER = logging.getLogger(__name__)
 T = TestData()
 H = Helper()
