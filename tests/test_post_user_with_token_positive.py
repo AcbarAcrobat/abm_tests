@@ -4,7 +4,8 @@ from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
 
-TeD = TestData()
+
+T = TestData()
 H = Helper()
 
 
@@ -13,7 +14,7 @@ H = Helper()
 @allure.title("Post request to the server")
 def test_post_user_with_token():
     with allure.step("Send request to the server with valid token"):
-        r = requests.post(TeD.url() + "/user", json={'token': H.tok3n()})
+        r = requests.post(T.url() + "/user", json={'token': H.tok3n()})
     with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
     with allure.step("Assert contains result in r.json()"):

@@ -17,3 +17,4 @@ config.yml
 **/.idea
 **/config.yml
 allure_results
+fixture
