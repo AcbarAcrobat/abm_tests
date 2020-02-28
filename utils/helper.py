@@ -1,6 +1,6 @@
 import random
 import requests
-from src.testdata import TestData
+from utils.testdata import TestData
 
 
 TeD = TestData()

@@ -1,9 +1,11 @@
 import allure
 import requests
 from truth.truth import AssertThat
-from src.testdata import TestData
-from src.helper import Helper
+from utils.testdata import TestData
+from utils.helper import Helper
+import logging
 
+LOGGER = logging.getLogger(__name__)
 T = TestData()
 H = Helper()
 
@@ -16,4 +18,6 @@ def test_get_regions_by_token_null():
         r = requests.post(T.url() + "/user/regions", json={"token": "   "})
     with allure.step("Assert status code is 401"):
         AssertThat(r.status_code).IsEqualTo(401)
-    print(r)
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())
