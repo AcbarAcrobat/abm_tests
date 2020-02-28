@@ -9,7 +9,6 @@ tests/.pytect_cache
 **/tests/.pytect_cache
 fixture/.pytest_cache
 tests/.pytest_cache
-config.yaml
 __pycache__
 config.yml
 **/.pytest_cache
@@ -18,3 +17,4 @@ config.yml
 **/config.yml
 allure_results/
 fixture
+*.pytest_cache

@@ -1,10 +1,13 @@
 import pytest
+import logging
+
+LOGGER = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session', autouse=True)
 def pikcha():
     yield
-    print(r'''           
+    LOGGER.info(r'''           
            \       /
              .---. 
         '-.  |   |  .-'
