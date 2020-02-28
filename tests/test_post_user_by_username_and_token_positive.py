@@ -3,7 +3,10 @@ import requests
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
+import logging
 
+
+LOGGER = logging.getLogger(__name__)
 T = TestData()
 H = Helper()
 
@@ -17,5 +20,8 @@ def test_post_user_by_username_and_token():
                                                             "username": T.username()})
     with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
-    print(r.status_code)
-    print(r.json())
+    with allure.step("Assert contains result in r.json()"):
+        AssertThat(r.json()).ContainsKey("result")
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())
