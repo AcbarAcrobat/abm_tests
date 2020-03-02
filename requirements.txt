@@ -2,5 +2,5 @@ requests==2.23.0
 pytest==5.3.5
 pytest-rerunfailures==8.0
 jsonschema==3.2.0
-pytruth==pytruth
+pytruth==1.1.0
 allure-pytest==2.8.11
