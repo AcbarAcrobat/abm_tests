@@ -18,10 +18,11 @@ def test_post_user_by_username_and_token():
     with allure.step("Send request to the server"):
         r = requests.post(T.url() + "/user/username", json={"token": H.tok3n(),
                                                             "username": T.username()})
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())
     with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
     with allure.step("Assert contains result in r.json()"):
         AssertThat(r.json()).ContainsKey("result")
-    with allure.step("LOGGER response"):
-        LOGGER.info(r.status_code)
-        LOGGER.info(r.json())
+

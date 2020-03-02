@@ -18,8 +18,9 @@ def test_get_user_by_null_id_and_correct_token():
     with allure.step("Send request to the server with correct token and id 0"):
         r = requests.post(T.url() + "/user/id", json={"token": H.tok3n(),
                                                       "id": 0})
-    with allure.step("Assert status code is 400"):
-        AssertThat(r.status_code).IsEqualTo(400)
     with allure.step("LOGGER response"):
         LOGGER.info(r.status_code)
         LOGGER.info(r.json())
+    with allure.step("Assert status code is 400"):
+        AssertThat(r.status_code).IsEqualTo(400)
+

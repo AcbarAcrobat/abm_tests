@@ -17,6 +17,9 @@ H = Helper()
 def test_post_user_with_token():
     with allure.step("Send request to the server with valid token"):
         r = requests.post(T.url() + "/user", json={'token': H.tok3n()})
+    with allure.step("LOGGER response"):
+        LOGGER.info(r.status_code)
+        LOGGER.info(r.json())
     with allure.step("Assert 200 status code"):
         AssertThat(r.status_code).IsEqualTo(200)
     with allure.step("Assert contains result in r.json()"):
@@ -24,6 +27,4 @@ def test_post_user_with_token():
     with allure.step("Assert ROLE_ABM_ADMIN and ROLE_MAIN_OPERATOR in r.json()[result]"):
         AssertThat(r.json()["result"]["roles"])\
             .ContainsAllIn(['ROLE_ABM_ADMIN', 'ROLE_MAIN_OPERATOR'])
-    with allure.step("LOGGER response"):
-        LOGGER.info(r.status_code)
-        LOGGER.info(r.json())
+
