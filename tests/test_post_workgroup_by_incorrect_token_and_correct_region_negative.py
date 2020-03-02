@@ -3,7 +3,7 @@ import requests
 from truth.truth import AssertThat
 from utils.testdata import TestData
 from utils.helper import Helper
-from generator.password_generator import random_password
+from data_generator.password_generator import random_password
 import logging
 
 
