@@ -18,8 +18,8 @@ def test_incorrect_login_with_null():
     with allure.step("Send request to the server with empty token and password"):
         r = requests.post(T.url() + "/login", json={"login": "   ",
                                                     "password": "   "})
-    with allure.step("Assert status code is 401"):
-        AssertThat(r.status_code).IsEqualTo(401)
     with allure.step("LOGGER response"):
         LOGGER.info(r.status_code)
         LOGGER.info(r.json())
+    with allure.step("Assert status code is 401"):
+        AssertThat(r.status_code).IsEqualTo(401)
